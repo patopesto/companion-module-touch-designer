@@ -1,0 +1,9 @@
+# OS X
+.DS_Store
+
+# Javascript
+node_modules/
+/pkg
+/pkg.tgz
+DEBUG-*
+/.yarn

@@ -1,0 +1,22 @@
+{
+	"name": "companion-module-touch-designer",
+	"version": "0.1.0",
+	"license": "MIT",
+	"main": "main.js",
+	"type": "module",
+	"scripts": {
+		"package": "companion-module-build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/patopesto/companion-module-touch-designer.git"
+	},
+	"dependencies": {
+		"@companion-module/base": "~1.11.2",
+		"osc": "^2.4.5"
+	},
+	"devDependencies": {
+		"@companion-module/tools": "^2.1.1"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json"
+}

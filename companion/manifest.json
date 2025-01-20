@@ -1,0 +1,26 @@
+{
+	"id": "touch-designer",
+	"name": "Touch Designer",
+	"shortname": "Touch Designer",
+	"description": "OSC integration with Touch Designer",
+	"version": "0.1.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/patopesto/companion-module-touch-designer.git",
+	"bugs": "https://github.com/patopesto/companion-module-touch-designer/issues",
+	"maintainers": [
+		{
+			"name": "Alban Moreon",
+			"email": "developer@bambinito.net"
+		}
+	],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "Derivative",
+	"products": ["Touch Designer"],
+	"keywords": []
+}
