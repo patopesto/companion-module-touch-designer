@@ -1,5 +1,3 @@
-// const osc = require('osc');
-// const dgram = require('dgram');
 import osc from 'osc'
 import dgram from 'dgram'
 
@@ -38,7 +36,7 @@ export class OSCUDPClient {
             });
 
             this.socket.bind({ address: "0.0.0.0", port: this.local_port }, () => {
-                this.root.log('info', `Listening for OSC messages on port ${this.local_port} with SO_REUSEPORT`)
+                this.root.log('info', `Listening for OSC messages on port ${this.socket.address().port} with SO_REUSEPORT`)
                 this.connected = true
                 this.root.updateStatus('ok')
                 resolve()

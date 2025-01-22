@@ -23,7 +23,7 @@ export class State {
             value = this.ops[op][param]
         }
         this.root.log('debug', `Getting op state for ${op}.${param} = ${value}`)
-        console.log(this.ops)
+        // console.log(this.ops)
         return value
     }
 

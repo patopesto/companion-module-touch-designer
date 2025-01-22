@@ -7,3 +7,7 @@ node_modules/
 /pkg.tgz
 DEBUG-*
 /.yarn
+
+# Touch Designer
+Backup/
+*.*.toe

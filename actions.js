@@ -14,25 +14,30 @@ export const UpdateActions = async function (instance) {
             })
     }
 
+    const getOSCType = (type, value) => {
+        switch (type) {
+            case 'int':
+                return ['i', Number(value)]
+            case 'float':
+                return ['f', parseFloat(value)]
+            case 'string':
+                return ['s', value]
+            case 'bool':
+                if (value > 0) { // TODO: rework this
+                    return ['T', null]
+                }
+                else {
+                    return ['F', null]
+                }
+
+        }
+        return [null, null]
+    }
+
     instance.setActionDefinitions({
-        sample_action: {
-            name: 'My First Action',
-            options: [
-                {
-                    id: 'num',
-                    type: 'number',
-                    label: 'Test',
-                    default: 5,
-                    min: 0,
-                    max: 100,
-                },
-            ],
-            callback: async (event) => {
-                console.log('Hello world!', event.options.num)
-            },
-        },
         operator_parameter: {
             name: 'Operator Parameter',
+            description: 'Send an operator parameter',
             options: [
                 {
                     id: 'op_name',
@@ -54,6 +59,7 @@ export const UpdateActions = async function (instance) {
                         { id: 'int', label: 'Number' },
                         { id: 'float', label: 'Float' },
                         { id: 'string', label: 'String' },
+                        { id: 'bool', label: 'Boolean' }, // Not ideal handling for now
                     ],
                     default: 'int'
                 },
@@ -71,14 +77,41 @@ export const UpdateActions = async function (instance) {
                 const value = await instance.parseVariablesInString(event.options.value)
 
                 const path = `/op/${op}/param/${parameter}`
+                const [ type, osc_value ] = getOSCType(event.options.type, value)
+                console.log(type, osc_value)
                 const args = [
                     {
-                        type: 'i',
-                        value: value,
+                        type: type,
+                        value: osc_value,
                     },
                 ]
                 sendOscMessage(path, args)
                 instance.state.updateOpState(op, parameter, value)
+            },
+        },
+        expression: {
+            name: 'Expression',
+            description: 'Send a python expression',
+            options: [
+                {
+                    id: 'value',
+                    type: 'textinput',
+                    label: 'Value',
+                    default: '',
+                },
+            ],
+            callback: async (event) => {
+                console.log('Press expression', event)
+                const value = await instance.parseVariablesInString(event.options.value)
+
+                const path = `/python`
+                const args = [
+                    {
+                        type: 's',
+                        value: value,
+                    },
+                ]
+                sendOscMessage(path, args)
             },
         },
     })

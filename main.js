@@ -16,8 +16,8 @@ class ModuleInstance extends InstanceBase {
 		this.config = config
 		this.state = new State(this)
 
-		if (this.config.host && this.config.port && this.config.local_port) {
-			this.client = new OSCUDPClient(this, this.config.host, this.config.port, this.config.local_port)
+		if (this.config.host && this.config.port) {
+			this.client = new OSCUDPClient(this, this.config.host, this.config.port, 0)
 			this.client.openConnection()
 		}
 
@@ -55,13 +55,13 @@ class ModuleInstance extends InstanceBase {
 				width: 4,
 				regex: Regex.PORT,
 			},
-			{
-				type: 'textinput',
-				id: 'local_port',
-				label: 'Local Port',
-				width: 4,
-				regex: Regex.PORT,
-			},
+			// {
+			// 	type: 'textinput',
+			// 	id: 'local_port',
+			// 	label: 'Local Port',
+			// 	width: 4,
+			// 	regex: Regex.PORT,
+			// },
 		]
 	}
 
